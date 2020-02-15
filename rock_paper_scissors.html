@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+
+        
+        <script>
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * Math.floor(max));
+            }
+
+            function computerPlay() {
+                const randInt = getRandomInt(3)
+                let computerSelection
+                if (randInt === 0){
+                    computerSelection = "rock"
+                }
+                else if (randInt === 1){
+                    computerSelection = "paper"
+                }
+                else if (randInt === 2){
+                    computerSelection = "scissors"
+                }
+                return computerSelection
+            }
+
+            function playerPlay() {
+                let playerSelection = prompt("Choose Rock, Paper, or Scissors")
+                const choices = ["rock", "paper", "scissors"]
+                playerSelection = playerSelection.toLowerCase()
+
+                if (choices.includes(playerSelection)) {
+                    return playerSelection
+                }
+                else {
+                    alert("You haven't entered a valid option.")
+                }
+            }
+
+            function playRound(playerSelection, computerSelection) {
+                const winCases = ["rockscissors","paperrock","scissorspaper"]
+                let comparison = playerSelection + computerSelection
+                
+                switch (true){
+                    case winCases.includes(comparison):
+                        alert("You Win! " + playerSelection + " beats " + computerSelection)
+                        return "player"
+                        break;
+                    case playerSelection === computerSelection:
+                        alert("You Tie! " + playerSelection + " ties with " + computerSelection)
+                        return "tie"
+                        break;
+                    default:
+                        alert("You Lose! " + playerSelection + " loses to " + computerSelection)
+                        return "computer"
+                        break;
+                }
+            }
+
+            function game() {
+                let count = {
+                    'player': 0,
+                    'tie':0,
+                    'computer':0
+                };
+                let i;
+                for (i = 0; i < 5; i++) {
+                    let outcome = playRound(playerPlay(),computerPlay())
+                    count[outcome]+=1;
+                    console.log(count)
+                };
+                console.log(count)
+                if (count['player'] > count['computer']){
+                    console.log("You win!")                    
+                }
+                else if (count['player'] < count['computer']){
+                    console.log("You lose!")                    
+                }                
+                else {
+                    console.log("You tied!")                    
+                }                
+            }
+            
+        </script>
+    </body>
+</html>
